@@ -147,6 +147,8 @@ const Register = () => {
               </i>
             </div>
 
+            {isLoading?<div className="loader"></div>:""}
+
             <div className="form-group">
               <button
                 type="submit"

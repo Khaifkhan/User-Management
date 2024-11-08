@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Roboto;
+}
+.navbar {
+  background-color: lightseagreen;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+nav .brandname {
+  text-decoration: none;
+  color: white;
+  font-size: 4vh;
+  padding: 2vh;
+  font-weight: 600;
+}
+.nav-links {
+  display: flex;
+  gap: 2vw;
+}
+.nav-link {
+  text-decoration: none;
+  color: white;
+  padding: 3vh 5vh;
+}
+.nav-link:hover {
+  background-color: #008080;
+  color: white;
+}
+.nav-link-active {
+  color: white;
+  text-decoration: none;
+  padding: 3vh 5vh;
+  background-color: #008080;
+  font-weight: bold;
+}

@@ -29,145 +29,149 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const returnedErrors = validateForm(formData);
-    setErrors(returnedErrors);
+    const Errors = validateForm(formData);
+    setErrors(Errors);
 
-    if (Object.values(returnedErrors).some((error) => error !== "")) return;
+    if (Object.values(Errors).some((error) => error !== "")) return;
 
     setIsLoading(true);
+    setSuccessMessage(""); 
 
     try {
       await axios.post("https://demo-practice.onrender.com/register", formData);
+      setIsLoading(false);
       setSuccessMessage("Account successfully created!");
 
       setTimeout(() => {
-        navigate("/login");
+        navigate("/login"); 
       }, 2000);
     } catch (error) {
       setIsLoading(false);
       console.error("Registration error: ", error);
-    } finally {
-      setIsLoading(false);
+      setSuccessMessage(
+        "An error occurred during registration. Please try again."
+      );
     }
   };
 
   return (
     <div className="register-container">
-      {isLoading && <div id="loader"></div>}
-      {!isLoading && (
-        <div className="register-form-wrapper">
-          <h2>Create Account</h2>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-input"
-                placeholder="First name"
-                name="first_name"
-                disabled={isLoading}
-                value={formData.first_name}
-                onChange={handleChange}
-              />
-              {errors.first_name && (
-                <p className="form-error-message">{errors.first_name}</p>
-              )}
-            </div>
+      <div className="register-form-wrapper">
+        <h2>Create Account</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-input"
+              placeholder="First name"
+              name="first_name"
+              disabled={isLoading}
+              value={formData.first_name}
+              onChange={handleChange}
+            />
+            {errors.first_name && (
+              <p className="form-error-message">{errors.first_name}</p>
+            )}
+          </div>
 
-            <div className="form-group">
-              <input
-                type="text"
-                className="form-input"
-                placeholder="Last name"
-                name="last_name"
-                disabled={isLoading}
-                value={formData.last_name}
-                onChange={handleChange}
-              />
-              {errors.last_name && (
-                <p className="form-error-message">{errors.last_name}</p>
-              )}
-            </div>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Last name"
+              name="last_name"
+              disabled={isLoading}
+              value={formData.last_name}
+              onChange={handleChange}
+            />
+            {errors.last_name && (
+              <p className="form-error-message">{errors.last_name}</p>
+            )}
+          </div>
 
-            <div className="form-group">
-              <input
-                type="email"
-                className="form-input"
-                placeholder="Email"
-                name="email"
-                disabled={isLoading}
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {errors.email && (
-                <p className="form-error-message">{errors.email}</p>
-              )}
-            </div>
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-input"
+              placeholder="Email"
+              name="email"
+              disabled={isLoading}
+              value={formData.email}
+              onChange={handleChange}
+            />
+            {errors.email && (
+              <p className="form-error-message">{errors.email}</p>
+            )}
+          </div>
 
-            <div className="form-group password-group">
-              <input
-                type={showPassword ? "text" : "password"}
-                className="form-input"
-                placeholder="Password"
-                name="password"
-                disabled={isLoading}
-                value={formData.password}
-                onChange={handleChange}
-              />
-              {errors.password && (
-                <p className="form-error-message">{errors.password}</p>
-              )}
-              <i
-                type="button"
-                className="password-toggle"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </i>
-            </div>
+          <div className="form-group password-group">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="form-input"
+              placeholder="Password"
+              name="password"
+              disabled={isLoading}
+              value={formData.password}
+              onChange={handleChange}
+            />
+            {errors.password && (
+              <p className="form-error-message">{errors.password}</p>
+            )}
+            <i
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </i>
+          </div>
 
-            <div className="form-group password-group">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                className="form-input"
-                placeholder="Confirm password"
-                name="confirmPassword"
-                disabled={isLoading}
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-              {errors.confirmPassword && (
-                <p className="form-error-message">{errors.confirmPassword}</p>
-              )}
-              <i
-                type="button"
-                className="password-toggle"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              >
-                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
-              </i>
-            </div>
+          <div className="form-group password-group">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              className="form-input"
+              placeholder="Confirm password"
+              name="confirmPassword"
+              disabled={isLoading}
+              value={formData.confirmPassword}
+              onChange={handleChange}
+            />
+            {errors.confirmPassword && (
+              <p className="form-error-message">{errors.confirmPassword}</p>
+            )}
+            <i
+              type="button"
+              className="password-toggle"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+            </i>
+          </div>
 
-            {isLoading?<div className="loader"></div>:""}
+          <div className="form-group">
+            <button type="submit" className="form-submit" disabled={isLoading}>
+              {isLoading ? "Registering..." : "Register"}
+            </button>
+          </div>
 
-            <div className="form-group">
-              <button
-                type="submit"
-                className="form-submit"
-                disabled={isLoading}
-              >
-                {isLoading ? "Registering..." : "Register"}
-              </button>
-            </div>
-            {successMessage && <div id="success-message">{successMessage}</div>}
-          </form>
-          <p className="reg-navigate">
-            Already have an account?
-            <Link className="log-link" to="/login">
-              Login
-            </Link>
-          </p>
-        </div>
-      )}
+          {successMessage && !isLoading && (
+            <div id="success-message">{successMessage}</div>
+          )}
+        </form>
+
+        <p className="reg-navigate">
+          Already have an account?
+          <Link className="log-link" to="/login">
+            Login
+          </Link>
+        </p>
+
+        {isLoading && (
+          <div id="loader-overlay">
+            <div id="loader"></div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

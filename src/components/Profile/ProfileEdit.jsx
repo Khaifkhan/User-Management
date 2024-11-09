@@ -25,7 +25,7 @@ const ProfileEdit = () => {
         const response = await axios.get(
           `https://demo-practice.onrender.com/userdata/${loggedUser.email}`
         );
-        setUser(response.data);
+        setUser(response.data); 
         setFormData({
           first_name: response.data.first_name,
           last_name: response.data.last_name,
@@ -39,10 +39,6 @@ const ProfileEdit = () => {
     fetchUserData();
   }, [navigate]);
 
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
   const handleSave = async () => {
     setIsLoading(true);
     const loggedUser = JSON.parse(localStorage.getItem("user"));
@@ -54,9 +50,10 @@ const ProfileEdit = () => {
       );
 
       localStorage.setItem("user", JSON.stringify(formData));
+
       setUser(response.data);
 
-      navigate("/profile");
+      navigate(`/${user.first_name}`); 
     } catch (error) {
       console.error("Error saving user data:", error);
     } finally {
@@ -67,6 +64,10 @@ const ProfileEdit = () => {
   const handleCancel = () => {
     navigate("/profile"); 
   };
+
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="register-container">

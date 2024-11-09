@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import React from "react";
+import logo from "../../assets/logo.png";
 
 const Navbar = () => {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -14,8 +15,9 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-brand">
-        <NavLink to="/" className="brandname">
-          Shopify
+        <NavLink to="/" className="brand-nav">
+          <img src={logo} alt="Brand Logo" />
+          <span className="brand-text">ShopEase</span>
         </NavLink>
       </div>
       <div className="nav-links">
@@ -33,7 +35,7 @@ const Navbar = () => {
         {user && (
           <>
             <NavLink
-              to="/profile"
+              to={`/${user.first_name}`}
               className={({ isActive }) =>
                 isActive ? "nav-link-active" : "nav-link"
               }

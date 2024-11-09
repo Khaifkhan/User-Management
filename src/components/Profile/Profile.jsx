@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Profile.css"; 
+import "../Login/Login.css"
 
 const Profile = () => {
   const [user, setUser] = useState(null);
@@ -25,7 +26,7 @@ const Profile = () => {
   };
 
   if (!user) {
-    return <div>Loading...</div>
+    return <div className="loader">Loading...</div>
   }
 
   return (

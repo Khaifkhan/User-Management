@@ -42,7 +42,6 @@ const Login = () => {
         "https://demo-practice.onrender.com/login",
         formData
       );
-
       const userDetails = await axios.get(
         `https://demo-practice.onrender.com/userdata/${formData.email}`
       );
@@ -60,8 +59,8 @@ const Login = () => {
   };
 
   return (
-    <div className="register-container">
-      <div className="register-form-wrapper">
+    <div className="login-container">
+      <div className="login-form-wrapper">
         <h2>Login</h2>
         {loginError && (
           <div className="error-message">

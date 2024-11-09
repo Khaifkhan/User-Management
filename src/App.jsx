@@ -58,10 +58,10 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path={`/${user.first_name}`} element={<Profile />} />
         <Route path={`/${user.first_name}/edit`} element={<ProfileEdit />} />
-        <Route
+        {/* <Route
           path="*"
           element={<Navigate to={`/${user.first_name}`} replace />}
-        />
+        /> */}
       </Routes>
     </Router>
   );
